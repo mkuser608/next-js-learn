@@ -7,12 +7,13 @@ interface User {
 
 const usersPage = async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/users", {
-    next: { revalidate: 1 }, //{cache: 'no-store'}
-  });
+    cache: "no-store",
+  }); //for static store cache
   const users: User[] = await res.json();
   return (
     <>
       <h1>Users</h1>
+      <p>{new Date().toLocaleTimeString()}</p>
       <ul>
         {users.map((user) => (
           <li key={user.id}>{user.name}</li>
